@@ -41,7 +41,11 @@ $(function(){
 			});
 		})(),
 		content:(function(){
-			if(isTouch()){ //if touch events exist...
+			//This code goes around a bug inside android browser where it
+			//will ignore overflow auto and overflow scroll. this tries to
+			//replicate the scrolling and scrolling velocity that is used
+			//by iOS.
+			if(isTouch()){ 
 				var scrollStartPos = 0;	
 				var elem = document.getElementById("content");
 				var velocity = 0;
