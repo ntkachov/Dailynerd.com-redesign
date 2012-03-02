@@ -1,0 +1,117 @@
+div{
+	position:relative;
+}
+body{
+	position:relative;
+	background-color:#f5f5f5;
+	padding:0;
+	margin:0;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 300;
+}
+.container{
+	width:100%;
+	height:100%;
+}
+#content{
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	overflow:auto;
+}
+header{
+	position:absolute;
+	top:0;
+	width:100%;
+	padding:10px;
+	z-index:1000;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	font-weight:800;
+	-webkit-box-shadow:1px 0px 3px #454545;
+	-moz-box-shadow:1px 0px 3px #454545;
+	box-shadow:1px 0px 3px #454545;
+}
+header div{
+}
+
+header.min{
+	height:45px;
+	padding:10px;
+}
+header.min div{
+	display:none;
+}
+header.min #headerTitle{
+	display:block;
+}
+
+footer{
+	position:relative;
+	font-weight:300;
+}
+div.buttonContainer{
+	padding:5px;
+}
+div.button{
+	height:20px;
+	background-color:rgba(110,133,255,0.25);
+	border-radius:10px;
+	-webkit-box-shadow:inset 0px 0px 7px #6E85B8;
+	-moz-box-shadow:inset 0px 0px 7px #6e85b8;
+	box-shadow:inset 0px 0px 7px #6e85b8;
+}
+div.bigpadding{
+	padding:15px;	
+}
+div.smallpadding{
+	padding:5px;
+}
+/* Header Content */
+#headerTitle{
+	width:100%;
+	text-align:center;
+	font-size:24px;
+}
+.hide{
+	display:none;
+}
+#facelogo{
+	float:left;
+	position:relative;
+	width:70px;
+	height:70px;
+	border:1px solid black;
+	border-radius:10px;
+	box-shadow:1px 1px 5px #000;	
+}
+#contactBox{
+	float:right;
+	width:50%;
+	margin:0 10px;
+	padding:0 10px;
+}
+#twitter{
+	float:left;
+	width:100%;
+	margin:10px 0;
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+}
+
+
+/* MAin Content */
+#main{
+	position:relative;
+	margin-top:45px;
+	height:1000px;
+}
