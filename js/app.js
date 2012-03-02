@@ -20,7 +20,7 @@ $(function(){
 		})(),
 		header:(function(){
 			var isFull = false;
-			$("header").click(function(){
+			$("header").toggle(function(){
 				if(isFull){return};
 				var header = $(this);
 				header.removeClass("min");
@@ -28,16 +28,11 @@ $(function(){
 				header.css("height","45px");
 				header.animate({height:height+"px"}, 200);
 				isFull = true;
-	
-				$(document).scroll(function(e){
-					console.log("scrollFired");
-					header.addClass("min");
-					isFull=false;
-					$(document).off('scroll');
-					
-					header.animate({height:"45px"},600, function(){header.css({height:""})});
-					
-				});
+			},function(){
+				var header = $(this);
+				header.addClass("min");
+				isFull=false;
+				header.animate({height:"45px"},600, function(){header.css({height:""})});
 			});
 		})(),
 		content:(function(){
@@ -50,9 +45,11 @@ $(function(){
 				var elem = document.getElementById("content");
 				var velocity = 0;
 				var prevDate = Date.now();
-				console.log(prevDate);
 				var prevScrollTop = elem.scrollTop;;
 				var intervalID;
+				var deltaT = 0; 
+				var deltaY = 0;
+				var nowDate = Date.now();
 				elem.addEventListener("touchstart",function(event) {
 					scrollStartPos=this.scrollTop+event.touches[0].pageY;
 					velocity = 0;
@@ -64,14 +61,17 @@ $(function(){
  
 				elem.addEventListener("touchmove", function(event) {
 					this.scrollTop=scrollStartPos-event.touches[0].pageY;
-					velocity = (this.scrollTop - prevScrollTop)/(Date.now() - prevDate);
-					prevDate = Date.now();
+					nowDate = Date.now();
+					deltaY = (this.scrollTop - prevScrollTop);
+					deltaT = (nowDate - prevDate);
+					prevDate = nowDate;
 					prevScrollTop = this.scrollTop;
-					event.preventDefault();
+					//event.preventDefault();
 				},false);
 
 				elem.addEventListener("touchend", function(event) {
 					var t = this;
+					velocity = deltaY / deltaT;
 					intervalID = setInterval(function(){
 						t.scrollTop = t.scrollTop + (velocity * 10);
 						velocity = velocity * 0.97;
