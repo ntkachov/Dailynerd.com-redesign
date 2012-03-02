@@ -70,13 +70,13 @@ $(function(){
 					var t = this;
 					intervalID = setInterval(function(){
 						t.scrollTop = t.scrollTop + (velocity * 10);
-						velocity = velocity * 0.95;
+						velocity = velocity * 0.97;
 						if(Math.abs(velocity) < 0.1){ 
 							velocity = 0;
 							clearInterval(intervalID);	
 							intervalID = undefined;
 						};
-					}, 20);	
+					}, 17);	
 				});
 				
 			}
