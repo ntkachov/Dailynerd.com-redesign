@@ -1,13 +1,14 @@
-$(function(){
+var thedailynerd = {};
+$(function() { 
 	function isTouch(){
 		try{
 			document.createEvent("TouchEvent");
 			return true;
 		}catch(e){
 			return false;
-	}
+		}
 	};
-	var app = {
+	thedailynerd = {
 		carosel: (function(){
 
 		})(),
@@ -15,7 +16,7 @@ $(function(){
 			var twitterURL = 'https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=false&screen_name=ntkachov&count=1&callback=?';
 			$.getJSON(twitterURL, function(data){
 				console.log(data[0].text);
-				$("#tweet").append(data[0].text);
+				$("#tweet").prepend(data[0].text);
 			});
 		})(),
 		header:(function(){
@@ -24,17 +25,13 @@ $(function(){
 				if(isFull){return};
 				var header = $(this);
 				header.removeClass("min");
-				var height = header.outerHeight();
-				header.css("height","45px");
-				header.animate({height:height+"px"}, 200);
 				isFull = true;
 			},function(){
 				var header = $(this);
 				header.addClass("min");
 				isFull=false;
-				header.animate({height:"45px"},600, function(){header.css({height:""})});
 			});
-		})(),
+		})(),/*
 		content:(function(){
 			//This code goes around a bug inside android browser where it
 			//will ignore overflow auto and overflow scroll. this tries to
@@ -42,7 +39,7 @@ $(function(){
 			//by iOS.
 			if(isTouch()){ 
 				var scrollStartPos = 0;	
-				var elem = document.getElementById("content");
+				var elem = document.getElementById("noelem");
 				var velocity = 0;
 				var prevDate = Date.now();
 				var prevScrollTop = elem.scrollTop;;
@@ -66,7 +63,7 @@ $(function(){
 					deltaT = (nowDate - prevDate);
 					prevDate = nowDate;
 					prevScrollTop = this.scrollTop;
-					//event.preventDefault();
+				//	event.preventDefault();
 				},false);
 
 				elem.addEventListener("touchend", function(event) {
@@ -84,7 +81,7 @@ $(function(){
 				});
 				
 			}
-		})()
+		})()*/
 	}
 	window.scrollTo(0,1);
 });
