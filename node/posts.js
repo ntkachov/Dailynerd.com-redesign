@@ -6,11 +6,11 @@ var tags = {};
 var postShort = [];
 
 fs.readFile(fileName, function(data){
-	parsePosts(JSON.parse(data));
+	//parsePosts(JSON.parse(data));
 });
 
 function parsePosts(posts){
-	for(var post in posts){
+	/*for(var post in posts){
 		postCollection.push(posts[post]);
 		for(var tag in posts[post].tags){
 			var tag = posts[post].tags;
@@ -18,18 +18,18 @@ function parsePosts(posts){
 			tags[tag].push(posts[post]);
 		}
 		
-	}	
+	}	*/
 }
 
-exports = {
-	getPosts: function(from, to){
-		return postCollection.slice(from, to-from);
+var _exports = {
+	getPost:function(timeStamp){
+		return " Test " ;
 	},
-	getTag: function(rTags){
-		var returnV = [];
-		for(var tag in rTags){
-		 	returnV.push(JSON.stringify(tags[tag]));	
-		}
-		return returnV.join();
+	getPostList:function (from, to){
+		console.log("postList");
+		return "[a,b,ab]";
 	}
+}
+for( var i in _exports){
+	exports[i] = _exports[i];
 }
