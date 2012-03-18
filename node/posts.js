@@ -1,35 +1,40 @@
 var fs = require('fs');
 
-var fileName = "posts.txt";
+var fileName = "post.json";
 var postCollection = [];
-var tags = {};
-var postShort = [];
+var postChrono = {};
+var sortedChrono = [];
 
-fs.readFile(fileName, function(data){
-	//parsePosts(JSON.parse(data));
+fs.readFile(fileName, "utf8",  function(err, data){
+	if(err){
+		console.log(err);	
+		return;
+	}
+	parsePosts(JSON.parse(data));
 });
 
 function parsePosts(posts){
-	/*for(var post in posts){
+	for(var post in posts){
+		post = posts[post];
 		postCollection.push(posts[post]);
-		for(var tag in posts[post].tags){
-			var tag = posts[post].tags;
-			if(tags[tag] == undefined){ tags[tag] = [];}
-			tags[tag].push(posts[post]);
-		}
-		
-	}	*/
+		postChrono[post.time] = post;
+		sortedChrono.push(post.time);
+	}
+	sortedChrono.sort();
+	console.log(sortedChrono);
 }
 
-var _exports = {
-	getPost:function(timeStamp){
-		return " Test " ;
-	},
-	getPostList:function (from, to){
-		console.log("postList");
-		return "[a,b,ab]";
+exports.getPost=function(timeStamp){
+		return postChrono[timeStamp]; ;
 	}
+exports.getPostOrder = function (from, to){
+		return  JSON.stringify(sortedChrono);
+	}
+exports.getPostList = function(from, to){
+	var postList = [];
+	for(var i = from; i < to; i++){
+		postList.push(postChrono[sortedChrono[i]]);
+	}
+	return JSON.stringify(postList);
 }
-for( var i in _exports){
-	exports[i] = _exports[i];
-}
+

@@ -9,16 +9,13 @@ function run(funct, data, res){
 	res(funct(data));
 }
 
-var _exports ={
-	getPost: function(req, res, data){
+exports.getPost= function(req, res, data){
 		run(posts.getPost, data, res);
 	},
-	getList: function(req, res, data){
+exports.getList = function(req, res, data){
 		console.log("r: Get LIST");
 		run(posts.getPostList, data, res);
 	}
-};
-
-for( var i in _exports){
-	exports[i] = _exports[i];
-}
+exports.getOrder = function(req, res, data){
+		run(posts.getPostOrder, data, res);
+	}

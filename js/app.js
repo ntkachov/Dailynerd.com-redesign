@@ -31,7 +31,14 @@ $(function() {
 				header.addClass("min");
 				isFull=false;
 			});
-		})(),/*
+		})(),
+		getPosts:(function(){
+			var nodeURL = "/node/getList";
+			$.post(nodeURL, {
+		})();
+
+
+/*
 		content:(function(){
 			//This code goes around a bug inside android browser where it
 			//will ignore overflow auto and overflow scroll. this tries to
