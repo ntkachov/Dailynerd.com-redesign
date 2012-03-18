@@ -3,6 +3,7 @@ var posts = require('./posts.js');
 console.log(posts);
 
 function run(funct, data, res){
+	console.log(data);
 	if(data != undefined){
 		data = JSON.parse(data);
 	}

@@ -33,9 +33,19 @@ $(function() {
 			});
 		})(),
 		getPosts:(function(){
+			
 			var nodeURL = "/node/getList";
-			$.post(nodeURL, {
-		})();
+			return function(from, to){
+				$.post(nodeURL, '["'+from +'","'+to +'"]', function(data){
+					console.log(data);
+					var data = JSON.parse(data);	
+					for(var d in data){
+						console.log(d);
+						$(".blogPost").append("<li>" + data[d].title + "</li>");
+					}
+				}); 
+			}
+		})(),
 
 
 /*
@@ -90,5 +100,7 @@ $(function() {
 			}
 		})()*/
 	}
+	thedailynerd.getPosts(0,10);	
 	window.scrollTo(0,1);
+	
 });

@@ -21,18 +21,20 @@ function parsePosts(posts){
 		sortedChrono.push(post.time);
 	}
 	sortedChrono.sort();
+	sortedChrono.reverse();
 	console.log(sortedChrono);
 }
 
 exports.getPost=function(timeStamp){
 		return postChrono[timeStamp]; ;
 	}
-exports.getPostOrder = function (from, to){
+exports.getPostOrder = function (data){
 		return  JSON.stringify(sortedChrono);
 	}
-exports.getPostList = function(from, to){
+exports.getPostList = function(data){
+	var from = data[0], to = data[1];
 	var postList = [];
-	for(var i = from; i < to; i++){
+	for(var i = from; i <= to; i++){
 		postList.push(postChrono[sortedChrono[i]]);
 	}
 	return JSON.stringify(postList);
