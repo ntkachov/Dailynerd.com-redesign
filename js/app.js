@@ -41,64 +41,25 @@ $(function() {
 					var data = JSON.parse(data);	
 					for(var d in data){
 						console.log(d);
-						$(".blogPost").append("<li>" + data[d].title + "</li>");
+						$(".blogPost").append("<li onclick=\"thedailynerd.getBody(" + data[d].time + ")\">" + data[d].title + "</li>");
 					}
 				}); 
 			}
 		})(),
-
-
-/*
-		content:(function(){
-			//This code goes around a bug inside android browser where it
-			//will ignore overflow auto and overflow scroll. this tries to
-			//replicate the scrolling and scrolling velocity that is used
-			//by iOS.
-			if(isTouch()){ 
-				var scrollStartPos = 0;	
-				var elem = document.getElementById("noelem");
-				var velocity = 0;
-				var prevDate = Date.now();
-				var prevScrollTop = elem.scrollTop;;
-				var intervalID;
-				var deltaT = 0; 
-				var deltaY = 0;
-				var nowDate = Date.now();
-				elem.addEventListener("touchstart",function(event) {
-					scrollStartPos=this.scrollTop+event.touches[0].pageY;
-					velocity = 0;
-					if(intervalID){
-						clearInterval(intervalID);
-					}
-					event.preventDefault();
-				},false);
- 
-				elem.addEventListener("touchmove", function(event) {
-					this.scrollTop=scrollStartPos-event.touches[0].pageY;
-					nowDate = Date.now();
-					deltaY = (this.scrollTop - prevScrollTop);
-					deltaT = (nowDate - prevDate);
-					prevDate = nowDate;
-					prevScrollTop = this.scrollTop;
-				//	event.preventDefault();
-				},false);
-
-				elem.addEventListener("touchend", function(event) {
-					var t = this;
-					velocity = deltaY / deltaT;
-					intervalID = setInterval(function(){
-						t.scrollTop = t.scrollTop + (velocity * 10);
-						velocity = velocity * 0.97;
-						if(Math.abs(velocity) < 0.1){ 
-							velocity = 0;
-							clearInterval(intervalID);	
-							intervalID = undefined;
-						};
-					}, 17);	
+		getBody: (function(){
+			var nodeURL = "/node/getPost";	
+			return function(posttime){
+				$.post(nodeURL,	'{"posttime":' + posttime + '}', function(data){
+					console.log(data);
+					var data = JSON.parse(data);
+					$(".fullpost").html("<h1>" + data.title + "</h1> <p>" + data.blurb + "</p><p>"+ data.body + "</p>");
+					$(".blogLinks").hide();
+					
 				});
-				
 			}
-		})()*/
+		})()
+
+
 	}
 	thedailynerd.getPosts(0,10);	
 	window.scrollTo(0,1);

@@ -26,7 +26,8 @@ function parsePosts(posts){
 }
 
 exports.getPost=function(timeStamp){
-		return postChrono[timeStamp]; ;
+		timeStamp = timeStamp.posttime;
+		return JSON.stringify( postChrono[timeStamp]) ;
 	}
 exports.getPostOrder = function (data){
 		return  JSON.stringify(sortedChrono);
