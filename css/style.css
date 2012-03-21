@@ -132,7 +132,6 @@ header.min{
 	padding:10px;
 }
 header.min div{
-	display:none;
 }
 header.min #headerTitle{
 	display:block;
@@ -152,6 +151,15 @@ div.button{
 	border:1px solid rgba(110,133,255,0.5)
 }
 /* Header Content */
+#backbutton{
+	position:absolute;
+	top:8px;
+	padding:1px 3px 1px 3px;
+	float:left;
+	background-color:rgba(110,133,255,0.25);
+	border-radius:2px;
+	border:1px solid rgba(110,133,255,0.5)
+}
 #headerTitle{
 	width:100%;
 	text-align:center;
