@@ -17,9 +17,9 @@ $(function() {
 				});
 			})(),
 			header:(function(){
-				$("#backbutton").click(function(){
+		/*		$("#backbutton").click(function(){
 					location.hash = "home";
-				});
+				});*/
 			})(),
 			getPosts:(function(){
 				
@@ -30,7 +30,7 @@ $(function() {
 						var data = JSON.parse(data);	
 						for(var d in data){
 							if(data[d]!=undefined){
-								$(".blogPost").append("<li onclick=\"thedailynerd.getBody(" + data[d].time + ")\">" + data[d].title + "</li>");
+								$(".blogPost").append("<a href=#" + data[d].time + "> <li>"+ data[d].title + "</li></a>");
 							}
 						}
 						//Change site back to home page.
@@ -43,7 +43,6 @@ $(function() {
 				var nodeURL = "/node/getPost";	
 				return function(posttime){
 					$.post(nodeURL,	'{"posttime":' + posttime + '}', function(data){
-						
 						console.log(data);
 						var data = JSON.parse(data);
 						location.hash=data.time;
@@ -53,7 +52,10 @@ $(function() {
 						
 					});
 				}
-			})()
+			})(),
+			changeHash: function(hash){
+				location.hash = hash;
+			}
 
 
 		}
@@ -63,6 +65,10 @@ $(function() {
 		if(location.hash == "#home"){
 			thedailynerd.getPosts(0,10);
 		}
+		else{
+			thedailynerd.getBody(location.hash.substring(1,location.hash.length));
+		}
+		
 	};	
 	if(location.hash != "#home" && location.hash != undefined){
 		thedailynerd.getBody(location.hash.substring(1,location.hash.length));
