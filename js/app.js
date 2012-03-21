@@ -9,17 +9,10 @@ $(function() {
 		}
 	};
 	thedailynerd = (function(){
-		window.onhashchange = function(){
-			if(location.hash == "home"){
-				getBody(0,10);
-
-			}
-		};	
 		return {
 			twitter: (function(){
 				var twitterURL = 'https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=false&screen_name=ntkachov&count=1&callback=?';
 				$.getJSON(twitterURL, function(data){
-					console.log(data[0].text);
 					$("#tweet").prepend(data[0].text);
 				});
 			})(),
@@ -33,11 +26,12 @@ $(function() {
 				var nodeURL = "/node/getList";
 				return function(from, to){
 					$.post(nodeURL, '["'+from +'","'+to +'"]', function(data){
-						console.log(data);
+						$(".blogPost").html("");
 						var data = JSON.parse(data);	
 						for(var d in data){
-							console.log(d);
-							$(".blogPost").append("<li onclick=\"thedailynerd.getBody(" + data[d].time + ")\">" + data[d].title + "</li>");
+							if(data[d]!=undefined){
+								$(".blogPost").append("<li onclick=\"thedailynerd.getBody(" + data[d].time + ")\">" + data[d].title + "</li>");
+							}
 						}
 						//Change site back to home page.
 						$(".blogLinks").show();
@@ -52,9 +46,10 @@ $(function() {
 						
 						console.log(data);
 						var data = JSON.parse(data);
-						location.hash=data.title;
+						location.hash=data.time;
 						$(".fullpost").html("<h1>" + data.title + "</h1> <p>" + data.blurb + "</p><p>"+ data.body + "</p>");
 						$(".blogLinks").hide();
+						$(".fullpost").show();
 						
 					});
 				}
@@ -64,6 +59,16 @@ $(function() {
 		}
 		
 	})();	
-	thedailynerd.getPosts(0,10);	
+	window.onhashchange = function(){
+		if(location.hash == "#home"){
+			thedailynerd.getPosts(0,10);
+		}
+	};	
+	if(location.hash != "#home" && location.hash != undefined){
+		thedailynerd.getBody(location.hash.substring(1,location.hash.length));
+	}
+	else{
+		thedailynerd.getPosts(0,10);	
+	}
 	window.scrollTo(0,1);
 });
