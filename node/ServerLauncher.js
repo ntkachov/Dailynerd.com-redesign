@@ -21,13 +21,13 @@ function connectionManager(req, res) {
 			'Content-Type': 'text/plain'
 		});
 		if(router[url] != undefined){
-		//	try{
+			try{
 			router[url](req, function(resp){
 				res.end(resp);},data);
-			/*}
+			}
 			catch(err){
-				console.log();
-			}*/
+				console.log(err);
+			}
 		}
 		else{
 			console.log(url + " does not exist");

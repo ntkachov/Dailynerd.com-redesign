@@ -1,4 +1,5 @@
 var posts = require('./posts.js');
+var submit = require('./postmaker.js');
 
 console.log(posts);
 
@@ -19,4 +20,7 @@ exports.getList = function(req, res, data){
 	}
 exports.getOrder = function(req, res, data){
 		run(posts.getPostOrder, data, res);
+	}
+exports.submitPost = function(req, res, data){
+		run(submit.submitPost, data, res);
 	}

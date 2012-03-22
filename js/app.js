@@ -70,7 +70,7 @@ $(function() {
 		}
 		
 	};	
-	if(location.hash != "#home" && location.hash != undefined){
+	if(location.hash != "#home" && location.hash != ""){
 		thedailynerd.getBody(location.hash.substring(1,location.hash.length));
 	}
 	else{
