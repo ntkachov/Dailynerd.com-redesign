@@ -208,6 +208,7 @@ ul.blogpost {
 	text-indent:0px;;
 }
 ul.blogpost li{
+	position:relative;
 	display:block;
 	border-bottom:1px solid black;
 	border-top:1px solid gray;
@@ -229,4 +230,13 @@ ul.blogpost li p{
 	font-size:1.5em;
 	text-align:center;
 	color:white;
+}
+.title{}
+.blurb{}
+.time{
+	position:absolute;
+	bottom:10px;
+	right:10px;
+	font-size:12px;
+	
 }

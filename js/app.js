@@ -8,6 +8,10 @@ $(function() {
 			return false;
 		}
 	};
+	function formatHTML(title, blurb, time){
+		return "<a href=#" + time + "> <li> <h1 class=\"title\">"+title + "</h1><p class=\"blurb\">" + blurb + "</p><p class=\"time\">"+ time +"</p></li></a>"
+
+	}
 	thedailynerd = (function(){
 		return {
 			twitter: (function(){
@@ -30,7 +34,7 @@ $(function() {
 						var data = JSON.parse(data);	
 						for(var d in data){
 							if(data[d]!=undefined){
-								$(".blogPost").append("<a href=#" + data[d].time + "> <li>"+ data[d].title + "</li></a>");
+								$(".blogPost").append( formatHTML(data[d].title, data[d].blurb, data[d].time)  );
 							}
 						}
 						//Change site back to home page.
