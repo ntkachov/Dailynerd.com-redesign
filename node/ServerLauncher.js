@@ -4,7 +4,7 @@ router = require('./nodeRouter.js');
 http.createServer(connectionManager).listen(9000);
 
 function connectionManager(req, res) {
-	var data;
+	var data = "";
 	var url = req.url.substring(6, req.url.length);
 	console.log(url);
 	req.on('data', function(chunk) {
