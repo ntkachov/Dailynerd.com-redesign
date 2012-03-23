@@ -1,7 +1,6 @@
 var posts = require('./posts.js');
 var submit = require('./postmaker.js');
 
-console.log(posts);
 
 function run(funct, data, res){
 	console.log(data);
@@ -12,6 +11,7 @@ function run(funct, data, res){
 }
 
 exports.getPost= function(req, res, data){
+		console.log("r: Get POST");
 		run(posts.getPost, data, res);
 	},
 exports.getList = function(req, res, data){

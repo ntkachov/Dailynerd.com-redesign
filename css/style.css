@@ -240,3 +240,15 @@ ul.blogpost li p{
 	font-size:12px;
 	
 }
+@media screen and (min-device-width:700px){
+	.container{
+		width:720px;	
+		margin-left:auto;
+		margin-right:auto;
+	}
+	.twitter-follow-button{
+		float:right;
+		margin:2px 0px 0px 5px;
+	}
+
+}

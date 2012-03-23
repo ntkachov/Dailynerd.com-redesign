@@ -9,7 +9,8 @@ $(function() {
 		}
 	};
 	function formatHTML(title, blurb, time){
-		return "<a href=#" + time + "> <li> <h1 class=\"title\">"+title + "</h1><p class=\"blurb\">" + blurb + "</p><p class=\"time\">"+ time +"</p></li></a>"
+		var d = new Date(time).toDateString();
+		return "<a href=#" + time + "> <li> <h1 class=\"title\">"+title + "</h1><p class=\"blurb\">" + blurb + "</p><p class=\"time\">"+ d +"</p></li></a>"
 
 	}
 	thedailynerd = (function(){
