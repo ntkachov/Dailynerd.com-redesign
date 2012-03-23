@@ -1,0 +1,64 @@
+<html>
+<head>
+<style>
+input{
+	width:300px;
+}
+textarea{
+	width:300px;
+	height:100px;
+}
+#body{
+	height:200px;
+}	
+p{
+margin:0;
+}
+</style>
+<meta name="viewport" content="width=device-width; initial-scale = 1.0;
+maximum-scale=1.0; user-scalable=no">
+</head>
+<body>
+<div>
+<p>Title:</p>
+<input id="title"></input>
+</div><div>
+<p>blurb:</p>
+<textarea id="blurb"></textarea>
+</div><div>
+<p>body:</p>
+<textarea id="body"></textarea>
+</div><div>
+<p>tags:</p>
+<input id="tags" ></input>
+</div><div>
+<p>password</p>
+<input id="password" ></input>
+</div>
+<div id="submit" style="width:100%; height:50px;
+background-color:lightblue; text-align:center" onclick="submit()">Submit</div>
+
+<script type="text/javascript"
+src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+function submit(){
+	var title = $("#title").val(),
+	blurb = $("#blurb").val(),
+	body = $("#body").val(),
+	tags = $("#tags").val(),
+	pass = $("#password").val();
+	var a = {"title": title,"blurb": blurb,"body": body,"tags": tags, "password": pass};
+	var s = JSON.stringify(a);
+	console.log(s);	
+$.post("/node/submitPost", s, function(data){
+		if(data){
+			console.log(data);
+		}
+	}).error(function(){
+		$("#submit").css("background-color",
+"pink").html("Error: " + arguments[2]);
+	});
+};
+
+</script>
+</body></html>
