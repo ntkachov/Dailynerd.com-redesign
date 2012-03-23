@@ -1,12 +1,14 @@
 var fs = require('fs');
-var posts = require("./posts.js");
+var pc = require("./posts.js");
 var filename = "post.json";
+
+console.log(posts);
 
 var password = fs.readFileSync("password.txt", "utf8").replace(/(\r\n|\n|\r)/gm,"");
 console.log(password);
-//For my personal use only. Not supposed to be robust or used during high traffic. Simple system to update posts
-//infrequently. 
-//Uses a simple method of read all the posts, append to all the posts, write everything back. Good enough. 
+
+
+
 exports.submitPost = function(post){	
 	var return_ = "sucess"; 
 	if(post.password == password){
@@ -33,6 +35,6 @@ exports.submitPost = function(post){
 		console.log('"' + post.password + '""' + password+'"');
 		return_ = "Incorrect password";
 	}
-	posts.refresh();
+	pc.refresh();
 	return return_;
 };
