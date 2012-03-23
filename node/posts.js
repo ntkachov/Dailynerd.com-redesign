@@ -1,10 +1,11 @@
 var fs = require('fs');
 
 var fileName = "post.json";
-var postCollection = [];
 var postChrono = {};
 var sortedChrono = [];
 
+
+//Starts a new collection of all the posts.
 function collect(){
 	fs.readFile(fileName, "utf8",  function(err, data){
 		if(err){
@@ -15,17 +16,15 @@ function collect(){
 	});
 }
 function parsePosts(posts){
-	postCollection = [];
 	postChrono = {};
 	sortedChrono = [];
 	for(var post in posts){
 		post = posts[post];
-		postCollection.push(post);
-		postChrono[post.time] = post;
-		sortedChrono.push(post.time);
+		postChrono[post.time] = post; //Hashes all the post by time.
+		sortedChrono.push(post.time); 
 	}
-	sortedChrono.sort();
-	sortedChrono.reverse();
+	sortedChrono.sort(); //Sorts all the post by time
+	sortedChrono.reverse(); //We need newest first.
 	console.log(sortedChrono);
 }
 

@@ -2,7 +2,6 @@ http = require('http');
 router = require('./nodeRouter.js');
 
 http.createServer(connectionManager).listen(8000);
-var throwerror = true;
 
 function connectionManager(req, res) {
 	var data;
@@ -11,25 +10,19 @@ function connectionManager(req, res) {
 	req.on('data', function(chunk) {
 		chunk = unescape(chunk.toString());
 		chunk = chunk.replace(/\+/g, ' ');
-		data = chunk;
+		data += chunk;
 	});
 	req.on('end', function(){
 		res.writeHead(200, {
 			'Content-Type': 'text/plain'
 		});
-		if(router[url] != undefined){
-			if(throwerror){
+		if(router[url] != undefined){ //checks to see if the router has a given function. Then executes it.
+			try{
 				router[url](req, function(resp){
 				res.end(resp);},data);
 			}
-			else{
-				try{
-					router[url](req, function(resp){
-					res.end(resp);},data);
-				}
-				catch(err){
-					console.log(err);
-				}
+			catch(err){
+				console.log(err);
 			}
 		}
 		else{

@@ -1,13 +1,5 @@
 var thedailynerd = {};
 $(function() { 
-	function isTouch(){
-		try{
-			document.createEvent("TouchEvent");
-			return true;
-		}catch(e){
-			return false;
-		}
-	};
 	function formatHTML(title, blurb, time){
 		var d = new Date(time).toDateString();
 		return "<a href=#" + time + "> <li> <h1 class=\"title\">"+title + "</h1><p class=\"blurb\">" + blurb + "</p><p class=\"time\">"+ d +"</p></li></a>"
@@ -22,9 +14,14 @@ $(function() {
 				});
 			})(),
 			header:(function(){
-		/*		$("#backbutton").click(function(){
-					location.hash = "home";
-				});*/
+				var id = "#headermore";
+				$("#headerTitle").toggle(function(){
+					$(id).addClass("headerMore");
+					$(id).removeClass("headerArrow");
+				}, function(){
+					$(id).removeClass("headerMore");
+					$(id).addClass("headerArrow");
+				});
 			})(),
 			getPosts:(function(){
 				
