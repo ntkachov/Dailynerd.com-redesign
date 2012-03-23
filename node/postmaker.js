@@ -2,7 +2,6 @@ var fs = require('fs');
 var pc = require("./posts.js");
 var filename = "post.json";
 
-console.log(posts);
 
 var password = fs.readFileSync("password.txt", "utf8").replace(/(\r\n|\n|\r)/gm,"");
 console.log(password);
