@@ -2,7 +2,7 @@ var http = require('http');
 var uri = require('url');
 var router = require('./nodeRouter.js');
 
-http.createServer(connectionManager).listen(8000);
+http.createServer(connectionManager).listen(9000);
 
 function connectionManager(req, res) {
 	var data = "";
