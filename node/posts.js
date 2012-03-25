@@ -36,7 +36,7 @@ exports.getPostOrder = function (data){
 		return  JSON.stringify(sortedChrono);
 	}
 exports.getPostList = function(data){
-	var from = data[0], to = data[1];
+	var from = data[0], to = data[1] < postChrono.length? data[i]  : postChrono.length;
 	var postList = [];
 	for(var i = from; i <= to; i++){
 		postList.push(postChrono[sortedChrono[i]]);
