@@ -1,5 +1,4 @@
 var http = require('http');
-var uri = require('url');
 var router = require('./nodeRouter.js');
 
 http.createServer(connectionManager).listen(9000);
@@ -14,13 +13,14 @@ function connectionManager(req, res) {
 		data += chunk;
 	});
 	if(data === ""){
-		var d = uri.parse(req.url);	
-		if(d.query != undefined){
-			data = decodeURI(d.query);
+		var d = req.url.slice(req.url.indexOf("?") + 1, req.url.length);
+		if(d != undefined){
+			data = decodeURI(d);
 			url = url.substring(0, url.indexOf("?"));
-			console.log(url);
 		}
 	}
+	console.log("url : " + url);
+	console.log("data : " + data);
 	req.on('end', function(){
 		res.writeHead(200, {
 			'Content-Type': 'text/plain'
@@ -32,6 +32,7 @@ function connectionManager(req, res) {
 			}
 			catch(err){
 				console.log(err);
+				console.trace();
 			}
 		}
 		else{
