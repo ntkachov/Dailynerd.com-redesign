@@ -1,17 +1,26 @@
-http = require('http');
-router = require('./nodeRouter.js');
+var http = require('http');
+var uri = require('url');
+var router = require('./nodeRouter.js');
 
-http.createServer(connectionManager).listen(9000);
+http.createServer(connectionManager).listen(8000);
 
 function connectionManager(req, res) {
 	var data = "";
-	var url = req.url.substring(6, req.url.length);
+	var url = req.url.slice(6, req.url.length);
 	console.log(url);
 	req.on('data', function(chunk) {
 		chunk = unescape(chunk.toString());
 		chunk = chunk.replace(/\+/g, ' ');
 		data += chunk;
 	});
+	if(data === ""){
+		var d = uri.parse(req.url);	
+		if(d.query != undefined){
+			data = decodeURI(d.query);
+			url = url.substring(0, url.indexOf("?"));
+			console.log(url);
+		}
+	}
 	req.on('end', function(){
 		res.writeHead(200, {
 			'Content-Type': 'text/plain'

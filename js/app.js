@@ -23,11 +23,11 @@ $(function() {
 					$(id).addClass("headerArrow");
 				});
 			})(),
-			getPosts:(function(){
+			getPosts:(function(type){
 				
 				var nodeURL = "/node/getList";
 				return function(from, to){
-					$.post(nodeURL, '["'+from +'","'+to +'"]', function(data){
+					$[type](nodeURL, '["'+from +'","'+to +'"]', function(data){
 						$(".blogPost").html("");
 						var data = JSON.parse(data);	
 						for(var d in data){
@@ -40,11 +40,11 @@ $(function() {
 						$(".fullpost").hide();
 					}); 
 				}
-			})(),
-			getBody: (function(){
+			})("get"),
+			getBody: (function(type){
 				var nodeURL = "/node/getPost";	
 				return function(posttime){
-					$.post(nodeURL,	'{"posttime":' + posttime + '}', function(data){
+					$[type](nodeURL,	'{"posttime":' + posttime + '}', function(data){
 						console.log(data);
 						var data = JSON.parse(data);
 						location.hash=data.time;
@@ -54,7 +54,8 @@ $(function() {
 						
 					});
 				}
-			})(),
+			})("get"),
+			
 			changeHash: function(hash){
 				location.hash = hash;
 			}
@@ -64,7 +65,7 @@ $(function() {
 		
 	})();	
 	window.onhashchange = function(){
-		if(location.hash == "#home"){
+		if(location.hash == "#home" || location.hash == ""){
 			thedailynerd.getPosts(0,10);
 		}
 		else{
