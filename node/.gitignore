@@ -1,0 +1,6 @@
+##Any swap files ##
+*.swp
+*.swap
+
+##Sensitive data ##
+password.*
