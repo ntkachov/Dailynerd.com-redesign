@@ -240,7 +240,7 @@ ul.blogpost li p{
 	font-size:12px;
 	
 }
-@media screen and (min-width:700px){
+@media screen and (min-width:1024px){
 	header{
 		float:right;
 		width:320px;
