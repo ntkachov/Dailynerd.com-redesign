@@ -8,10 +8,13 @@ $(function() {
 	thedailynerd = (function(){
 		return {
 			twitter: (function(){
-				var twitterURL = 'https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=false&screen_name=ntkachov&count=1&callback=?';
+				var twitterURL = 'http://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=false&screen_name=ntkachov&count=1&callback=?';
 				$.getJSON(twitterURL, function(data){
 					$("#tweet").prepend(data[0].text);
 				});
+				//Load the image so we have a faster first view
+				var twitterimagescr ="http://si0.twimg.com/images/dev/cms/intents/bird/bird_blue/bird_32_blue.png";
+				$("#twitterimage").attr("src", twitterimagescr);
 			})(),
 			header:(function(){
 				var id = "#headermore";
@@ -27,18 +30,7 @@ $(function() {
 				
 				var nodeURL = "/node/getList";
 				return function(from, to){
-					$[type](nodeURL, '["'+from +'","'+to +'"]', function(data){
-						$(".blogPost").html("");
-						var data = JSON.parse(data);	
-						for(var d in data){
-							if(data[d]!=undefined){
-								$(".blogPost").append( formatHTML(data[d].title, data[d].blurb, data[d].time)  );
-							}
-						}
-						//Change site back to home page.
-						$(".blogLinks").show();
-						$(".fullpost").hide();
-					}); 
+					$[type](nodeURL, '["'+from +'","'+to +'"]', thedailynerd.renderJSON); 
 				}
 			})("get"),
 			getBody: (function(type){
@@ -55,6 +47,18 @@ $(function() {
 					});
 				}
 			})("get"),
+			renderJSON: function(data){
+					$(".blogPost").html("");
+					var data = JSON.parse(data);	
+					for(var d in data){
+						if(data[d]!=undefined){
+							$(".blogPost").append( formatHTML(data[d].title, data[d].blurb, data[d].time)  );
+						}
+					}
+					//Change site back to home page.
+					$(".blogLinks").show();
+					$(".fullpost").hide();
+			},
 			
 			changeHash: function(hash){
 				location.hash = hash;
@@ -73,11 +77,18 @@ $(function() {
 		}
 		
 	};	
-	if(location.hash != "#home" && location.hash != ""){
-		thedailynerd.getBody(location.hash.substring(1,location.hash.length));
+	if(thedailynerd_blog_data === ""){
+		if(location.hash != "#home" && location.hash != ""){
+			thedailynerd.getBody(location.hash.substring(1,location.hash.length));
+		}
+		else{
+			thedailynerd.getPosts(0,10);	
+		}
 	}
-	else{
-		thedailynerd.getPosts(0,10);	
+	else{	
+		thedailynerd.renderJSON(thedailynerd_blog_data);
 	}
 	window.scrollTo(0,1);
+
+
 });

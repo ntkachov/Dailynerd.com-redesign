@@ -12,16 +12,16 @@ function connectionManager(req, res) {
 		chunk = chunk.replace(/\+/g, ' ');
 		data += chunk;
 	});
-	if(data === ""){
-		var d = req.url.slice(req.url.indexOf("?") + 1, req.url.length);
-		if(d != undefined){
-			data = decodeURI(d);
-			url = url.substring(0, url.indexOf("?"));
-		}
-	}
-	console.log("url : " + url);
-	console.log("data : " + data);
 	req.on('end', function(){
+		console.log("url : " + url);
+		console.log("data : " + data);
+		if(data === ""){
+			var d = req.url.slice(req.url.indexOf("?") + 1, req.url.length);
+			if(d != undefined){
+				data = decodeURI(d);
+				url = url.substring(0, url.indexOf("?"));
+			}
+		}
 		res.writeHead(200, {
 			'Content-Type': 'text/plain'
 		});
