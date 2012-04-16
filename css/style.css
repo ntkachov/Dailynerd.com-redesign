@@ -234,13 +234,12 @@ ul.blogpost li p{
 .title{}
 .blurb{}
 .time{
-	position:absolute;
-	bottom:10px;
-	right:10px;
 	font-size:12px;
+	float:right;
+	margin-right:10px;
 	
 }
-@media screen and (min-width:1024px){
+@media screen and (min-width:1040px){
 	header{
 		float:right;
 		width:320px;
