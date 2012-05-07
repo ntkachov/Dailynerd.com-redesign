@@ -77,7 +77,8 @@ $(function() {
 		}
 		
 	};	
-	if(thedailynerd_blog_data === ""){
+	typeof(thedailynerd_blog_data) == "undefined"? thedailynerd_blog_data = "" : false;
+	if( thedailynerd_blog_data == "" ){
 		if(location.hash != "#home" && location.hash != ""){
 			thedailynerd.getBody(location.hash.substring(1,location.hash.length));
 		}
