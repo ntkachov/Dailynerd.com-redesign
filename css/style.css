@@ -274,7 +274,6 @@ ul.blogpost li p{
 @media screen and (min-width:870px){
 	header{
 		position:relative;
-		left:550px;
 		width:320px;
 	}
 	.content{
