@@ -225,13 +225,17 @@ div.border div{
 	height:40px;
 	padding:5px;
 	background-color:rgba(50,50,50,0.1);
-	border-bottom-left-radius:5px;
 	border:1px solid rgba(50,50,50,0.1);
+	margin:5px;
 }
 
 
 .fl{
 	float:left;
+}
+
+.fr{
+	float:right;
 }
 
 /* MAin Content */
@@ -278,7 +282,7 @@ ul.blogpost li p{
 	}
 	
 	.container{
-		width:550px;
+		width:880px;
 		margin-left:auto;
 		margin-right:auto;
 	}
